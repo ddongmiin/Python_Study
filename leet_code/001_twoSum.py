@@ -26,6 +26,5 @@ class Solution(object):
 
         print(f"ther is no value for {target}")
 
-
 instance1 = Solution()
 print(instance1.twoSum2([1, 2, 3, 4], 7))

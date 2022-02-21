@@ -37,4 +37,50 @@ toc = time.time()
 
 print('Done in {:.4f} seconds'.format(toc-tic))
 
-# to be continue...
+# 10 different multi-processing instances using a for loop
+tic = time.time()
+
+process_list = []
+for i in range(10):
+    p = multiprocessing.Process(target=sleepy_man)
+    p.start()
+    process_list.append(p)
+
+for process in process_list:
+    process.join()
+
+toc = time.time()
+print('Done in {:.4f} seconds'.format(toc-tic))
+
+# using args
+tic = time.time()
+
+process_list = []
+for i in range(10):
+    p = multiprocessing.Process(target=sleepy_man, args=[2])
+    p.start()
+    process_list.append(p)
+
+for process in process_list:
+    process.join()
+
+toc = time.time()
+print('Done in {:.4f} seconds'.format(toc-tic))
+
+
+# Multi-Processing using Pool class
+def sleepy_man(sec):
+    print('Starting to sleep for {} seconds'.format(sec))
+    time.sleep(sec)
+    print('Done sleeping for {} seconds'.format(sec))
+
+
+tic = time.time()
+
+pool = multiprocessing.Pool(5)
+pool.map(sleepy_man, range(1, 11))
+pool.close()
+
+toc = time.time()
+
+print('Done in {:.4f} seconds'.format(toc-tic))

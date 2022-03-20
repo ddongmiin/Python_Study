@@ -46,6 +46,16 @@ def sample1(a:int):
 
 sample1(3)(3)
 
+class B:
+    def __init__(self, val1, val2):
+        self.val1 = val1
+        self.val2 = val2
+
+    def __call__(self, val3):
+        return self.val1 + self.val2 + val3
+
+a = B(1, 2)
+print(a(3))
 
 
 
